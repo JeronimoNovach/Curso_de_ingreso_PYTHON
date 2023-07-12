@@ -39,38 +39,48 @@ class App(customtkinter.CTk):
 
     def btn_calcular_on_click(self):
 
-        cant_lamps = self.combobox_cantidad.get()
+        cantidad_lamps = int(self.combobox_cantidad.get())
         marca = self.combobox_marca.get()
-        cant_lamps = int(cant_lamps)
-        precio_lamps = 800 * cant_lamps
+        precio_lamps = 800 * cantidad_lamps
+
+        cantidad_lamps = int(cantidad_lamps)
+        total = precio_lamps * cantidad_lamps
         valor = 0
-        if cant_lamps >= 6:
-           valor = 50
-        elif cant_lamps == 5:
-            if marca == "ArgentinaLuz":
-                valor = 40
-            else:
-                valor = 30
-        elif cant_lamps == 4:
-            if marca == "ArgentinaLuz" or marca == "FelipeLamparas":
-                valor = 25
-            else:
-                valor = 20       
-        elif cant_lamps == 3:
-            if marca == "ArgentinaLuz":
-                valor = 15               
-            elif marca == "FelipeLamparas":
-                valor = 10                    
-            else: 
-                valor = 5        
-        
-        descuento = precio_lamps - (precio_lamps * valor /100)
-        descuento_extra = descuento - (descuento * 5 / 100)
-        
-        if descuento > 4000:
-            alert("Descuento extra", f"El impuesto a pagar es: ${descuento_extra:.0f}")
+
+        if cantidad_lamps > 5:
+            valor = 50
         else:
-            alert("Descuento" , f"El impuesto a pagar es: ${descuento:.0f}")
+            if cantidad_lamps == 5:
+                if marca == "ArgentinaLuz":
+                    valor = 40
+                else:
+                    valor = 30
+            else:
+                if cantidad_lamps == 4:
+                    if marca == "ArgentinaLuz" or marca == "FelipeLamparas":
+                        valor = 35
+                    else:
+                        valor = 20
+                else:
+                    if cantidad_lamps == 3:
+                        if marca == "ArgentinaLuz":
+                            valor = 25
+                        else:
+                            if marca == "FelipeLamparas":
+                                valor = 10
+                            else:
+                                valor = 5
+
+        
+
+        total = precio_lamps - (precio_lamps * valor / 100)
+        descuento_extra = total - (total * 5 / 100)
+
+        if total > 4000:
+            alert("MENSAJE", f"El importe total es: ${descuento_extra:.0f}")
+        else:
+
+            alert("MENSAJE", f"El precio de su lampara es : ${total:.0f}")
             
     
 
